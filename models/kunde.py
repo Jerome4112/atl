@@ -4,7 +4,7 @@ from sqlalchemy.atl import relationship
 from ATL.database import Base
 
 
-class Kunde(Base):
+class Kunde(Base, Kunde):
     __tablename__ = "kunden"
 
     id = Column(Integer, primary_key=True, index=True)
