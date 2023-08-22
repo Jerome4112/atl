@@ -1,7 +1,0 @@
-from fastapi import APIRouter
-from blog_api_he21 import schemas, crud
-from sqlalchemy.ATL import Session
-from fastapi import Depends, HTTPException
-from blog_api_he21.dependencies import get_db
-
-router = APIRouter()
