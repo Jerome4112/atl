@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "atl"
+version = "0.1.0"
+description = ""
+authors = ["Jerome4112 <jerome1997@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = {extras = ["all"], version = "^0.103.0"}
+sqlalchemy = "^2.0.20"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
