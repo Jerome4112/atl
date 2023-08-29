@@ -1,13 +1,13 @@
 from fastapi import FastAPI
 
-from ATL.models import customer
+from ATL.models import customer as customer_schema
 from ATL.database import engine
 from ATL.routes import customer
-from ATL.schemas import customer
 
-customer.Customer.metadata.create_all(bind=engine)
+customer_schema.Customer.metadata.create_all(bind=engine)
 #post.Post.metadata.create_all(bind=engine)
 #comment.Comment.metadata.create_all(bind=engine)
+
 
 app = FastAPI()
 
