@@ -8,7 +8,7 @@ class Customer(Base):
     __tablename__ = "customer"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String, primary_key=True, index=True)
+    name = Column(String, unique=True, index=True)
 
     
 

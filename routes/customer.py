@@ -7,7 +7,7 @@ from ATL.dependencies import get_db
 from ATL.services.customer import (
     get_customer_by_name,
     create_customer as create_customer_service,
-    get_customer,
+    get_customer, get_customers
 )
 #from ATL.services.posts import create_user_post
 
@@ -23,8 +23,8 @@ def create_customer( customer: CustomerCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/", response_model=list[Customer])
-def read_customer(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    kunde = get_customer(db, skip=skip, limit=limit)
+def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
+    kunde = get_customers(db, skip=skip, limit=limit)
     return kunde
 
 
