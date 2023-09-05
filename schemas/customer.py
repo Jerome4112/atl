@@ -9,11 +9,21 @@ class CustomerBase(BaseModel):
 
 class CustomerCreate(CustomerBase):
     name: str
+    employee: str
+    adress: str
+    adressNr: int
+    email: str
+    tel: int
 
 
 class Customer(CustomerBase):
     id: int
     name: str
+    employee: str
+    adress: str
+    adressNr: int
+    email: str
+    tel: int
 
     class Config:
         from_attributes = True
