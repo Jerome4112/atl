@@ -17,7 +17,7 @@ def get_employees(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_employee(db: Session, employee: EmployeeCreate, customer_id: int):
-    db_employee = Employee(first_name=employee.first_name, last_name=employee.last_name, id=employee.id, email=employee.email, tel=employee.tel, customer_id=customer_id)
+    db_employee = Employee(id=employee.id, first_name=employee.first_name, last_name=employee.last_name, email=employee.email, tel=employee.tel, customer_id=customer_id)
     db.add(db_employee)
     db.commit()
     db.refresh(db_employee)

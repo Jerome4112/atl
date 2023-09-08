@@ -5,6 +5,7 @@ from ATL.schemas.employee import Employee
 
 class CustomerBase(BaseModel):
     id : int
+    name: str
 
 
 class CustomerCreate(CustomerBase):

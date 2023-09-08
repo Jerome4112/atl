@@ -27,14 +27,14 @@ def create_customer( customer: CustomerCreate, db: Session = Depends(get_db)):
     return create_customer_service(db=db, customer=customer)
 
 
-@router.get("/", response_model=list[Customer])
+@router.get("/", response_model=list[CustomerCreate])
 def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
     customer = get_customers(db, skip=skip, limit=limit)
     return customer
 
 
 @router.get("/{customer_id}", response_model=Customer)
-def read_customer(customer_id: int, db: Session = Depends(get_db)):
+def read_customer_workers(customer_id: int, db: Session = Depends(get_db)):
     db_customer = get_customer(db, customer_id=customer_id)
     if db_customer is None:
         raise HTTPException(status_code=404, detail="Customer not found")
