@@ -18,7 +18,7 @@ def get_customers(db: Session, skip: int = 0, limit: int = 100):
 
 def create_customer(db: Session, customer: CustomerCreate):
     #name = customer.name
-    db_customer = Customer(name=customer.name, id=customer.id, employee=customer.employee, adress=customer.adress, adressNr=customer.adressNr, email=customer.email, tel=customer.tel)
+    db_customer = Customer(name=customer.name, id=customer.id, adress=customer.adress, adressNr=customer.adressNr, email=customer.email, tel=customer.tel, city=customer.city, postalCode=customer.postalCode)
     db.add(db_customer)
     db.commit()
     db.refresh(db_customer)
