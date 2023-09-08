@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-#from ATL.schemas.posts import Post
+from ATL.schemas.employee import Employee
 #from ATL.schemas.comments import Comment
 
 
@@ -20,12 +20,13 @@ class CustomerCreate(CustomerBase):
 class Customer(CustomerBase):
     id: int
     name: str
-    adress: str
-    adressNr: int
-    email: str
-    tel: int
-    city: str
-    postalCode: int
+    #adress: str
+    #adressNr: int
+    #email: str
+    #tel: int
+    #city: str
+    #postalCode: int
+    employees: list[Employee] =[]
 
     class Config:
         from_attributes = True

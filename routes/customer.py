@@ -46,3 +46,4 @@ def create_employee( customer_id: int,employee: EmployeeCreate, db: Session = De
     if db_employee:
         raise HTTPException(status_code=400, detail="Employee already registered")
     return create_employee_service(db=db, employee=employee, customer_id=customer_id)
+
