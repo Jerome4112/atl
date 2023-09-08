@@ -16,6 +16,8 @@ class Customer(Base):
     city = Column(String, index = True)
     postalCode = Column(Integer, index=True)
 
+    employees = relationship("Employee", back_populates="customer")
+
     
 
 
