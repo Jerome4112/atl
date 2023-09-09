@@ -22,3 +22,22 @@ def create_employee(db: Session, employee: EmployeeCreate, customer_id: int):
     db.commit()
     db.refresh(db_employee)
     return db_employee
+
+def update_employee(db: Session, employee_id: int, employee_update: EmployeeCreate):
+    db_employee = db.query(Employee).filter(Employee.id == employee_id).first()
+    if not db_employee:
+        return None
+    for attr, value in employee_update.dict().items():
+        setattr(db_employee, attr, value)
+    db.commit()
+    return db_employee
+
+def delete_employee(db: Session, employee_id: int):
+    db_employee = db.query(Employee).filter(Employee.id == employee_id).first()
+    if not db_employee:
+        return None
+    db.delete(db_employee)
+    db.commit()
+    
+    return db_employee
+
