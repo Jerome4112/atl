@@ -15,7 +15,7 @@ from ATL.services.customer import (
 router = APIRouter(prefix="/customer")
 
 
-@router.post("/", response_model=Customer)
+@router.post("/", response_model=CustomerCreate)
 def create_customer( customer: CustomerCreate, db: Session = Depends(get_db)):
     db_customer = get_customer_by_name(db, name=customer.name)
     if db_customer:

@@ -17,6 +17,7 @@ class Customer(Base):
     postalCode = Column(Integer, index=True)
 
     employees = relationship("Employee", back_populates="customer")
+    orders = relationship("Order", back_populates="customer")
 
     
 

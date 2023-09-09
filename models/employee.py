@@ -15,4 +15,3 @@ class Employee(Base):
     customer_id = Column(Integer, ForeignKey("customer.id"))
 
     customer = relationship("Customer", back_populates="employees")
-    #comments = relationship("Comment", back_populates="post")
