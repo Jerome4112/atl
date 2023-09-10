@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from ATL.database import Base
 
 class Order(Base):
-    __tablename__ = "Order"
+    __tablename__ = "order"
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String, index=True)
     hardware = Column(String, index=True)
@@ -14,3 +14,4 @@ class Order(Base):
 
     #programs = relationship("Order", back_populates="programs")
     customer = relationship("Customer", back_populates="orders")
+    employee = relationship("Employee", back_populates="orders")

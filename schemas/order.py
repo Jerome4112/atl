@@ -4,6 +4,7 @@ from pydantic import BaseModel
 
 
 
+
 class OrderBase(BaseModel):
     id: int
     title: str

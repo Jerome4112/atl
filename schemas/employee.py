@@ -1,11 +1,12 @@
 from pydantic import BaseModel
-
+from ATL.schemas.order import Order
 
 
 
 class EmployeeBase(BaseModel):
     first_name: str
     last_name: str
+
 
 
 class EmployeeCreate(EmployeeBase):
@@ -20,3 +21,8 @@ class Employee(EmployeeBase):
     last_name: str
     email: str
     tel: int
+
+class Employee_order(EmployeeBase):
+    id: int
+    orders: list[Order] =[]
+

@@ -14,4 +14,6 @@ class Employee(Base):
     tel=Column(Integer, index=True)
     customer_id = Column(Integer, ForeignKey("customer.id"))
 
+
     customer = relationship("Customer", back_populates="employees")
+    orders = relationship("Order", back_populates="employee")

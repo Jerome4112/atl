@@ -1,11 +1,14 @@
 from sqlalchemy.orm import Session
 
 from ATL.models.employee import Employee
-from ATL.schemas.employee import EmployeeCreate
+from ATL.schemas.employee import EmployeeCreate, Employee_order
 
 
 def get_employee(db: Session, employee_id: int):
     return db.query(Employee).filter(Employee.id == employee_id).first()
+
+def get_employee_order(db: Session, employee_id: int):
+    return db.query(Employee_order).filter(Employee.id == employee_id).first()
 
 
 def get_employee_by_name(db: Session, name: str):
