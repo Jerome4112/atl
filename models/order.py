@@ -12,6 +12,7 @@ class Order(Base):
     employee_id = Column(Integer, ForeignKey("employee.id"))
     customer_id = Column(Integer, ForeignKey("customer.id"))
 
-    #programs = relationship("Order", back_populates="programs")
     customer = relationship("Customer", back_populates="orders")
     employee = relationship("Employee", back_populates="orders")
+    programs = relationship("Program", secondary="order_programs", back_populates="orders")
+

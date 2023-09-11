@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-#from ATL.schemas.program import Program
+from ATL.schemas.program import Program
 
 
 
@@ -16,8 +16,4 @@ class OrderCreate(OrderBase):
 class Order(OrderBase):
     hardware: str
     details: str
-
-#class Order(OrderBase):
-
-
-   # programs: list[Program] =[]
+    programs: list[Program] =[]

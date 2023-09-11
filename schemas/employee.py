@@ -21,8 +21,12 @@ class Employee(EmployeeBase):
     last_name: str
     email: str
     tel: int
+    orders: list[Order] =[]
 
 class Employee_order(EmployeeBase):
     id: int
     orders: list[Order] =[]
+    
+    class Config:
+        from_attributes = True
 

@@ -2,6 +2,7 @@ from sqlalchemy.orm import Session
 
 from ATL.models.order import Order
 from ATL.schemas.order import OrderCreate
+from ATL.models.orderPrograms import OrderPrograms
 
 def get_order(db: Session, order_id: int):
     return db.query(Order).filter(Order.id == order_id).first()
@@ -34,3 +35,11 @@ def delete_order(db: Session, order_id: int):
     db.commit()
     
     return db_order
+
+def add_program_to_order(db: Session, order_id: int, program_id: int):
+    # Überprüfen, ob die Bestellung und das Programm vorhanden sind
+    order_program = OrderPrograms(order_id=order_id, program_id=program_id)
+    db.add(order_program)
+    db.commit()
+    db.refresh(order_program)
+    return order_program
