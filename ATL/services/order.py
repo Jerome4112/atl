@@ -36,7 +36,7 @@ def delete_order(db: Session, order_id: int):
     
     return db_order
 
-def add_program_to_order(db: Session, order_id: int, program_id: int):
+def add_program(db: Session, order_id: int, program_id: int):
     # Überprüfen, ob die Bestellung und das Programm vorhanden sind
     order_program = OrderPrograms(order_id=order_id, program_id=program_id)
     db.add(order_program)

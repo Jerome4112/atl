@@ -6,9 +6,9 @@ from fastapi import Depends, HTTPException
 from ATL.dependencies import get_db
 from ATL.services.order import (
     create_order as create_order_service,
-    get_order, get_orders, update_order, delete_order,add_program_to_order
+    get_order, get_orders, update_order, delete_order,add_program
 )
-#from ATL.services.posts import create_user_post
+
 
 router = APIRouter(prefix="/order")
 
@@ -46,9 +46,9 @@ def delete_order_by_id(order_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Order not found")
     return deleted_order
 
-@router.post("/add_program{order_id},{program_id}", tags=["Order"])
+@router.post("/add_program", tags=["Order"])
 def add_program_to_order(order_id: int, program_id: int, db: Session = Depends(get_db)):
-    order_program = add_program_to_order(db, order_id, program_id)
+    order_program = add_program(db, order_id, program_id)
     if not order_program:
         raise HTTPException(status_code=404, detail="Order or Program not found")
     return {"message": "Program added to order successfully"}
