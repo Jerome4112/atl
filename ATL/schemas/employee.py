@@ -4,13 +4,13 @@ from ATL.schemas.order import Order
 
 
 class EmployeeBase(BaseModel):
+    id: int
     first_name: str
     last_name: str
 
 
 
 class EmployeeCreate(EmployeeBase):
-    id: int
     email: str
     tel: int
 
@@ -24,7 +24,6 @@ class Employee(EmployeeBase):
     orders: list[Order] =[]
 
 class Employee_order(EmployeeBase):
-    id: int
     orders: list[Order] =[]
     
     class Config:

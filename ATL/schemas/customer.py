@@ -19,8 +19,6 @@ class CustomerCreate(CustomerBase):
 
 
 class Customer(CustomerBase):
-    id: int
-    name: str
 
     employees: list[Employee] =[]
 
