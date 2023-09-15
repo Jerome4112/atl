@@ -38,25 +38,44 @@ client = TestClient(app)
 def clear_db():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
-def create_customer_for_test():
-    response=client.post(
-        "/customer/",
-        json={
-            "id": 1,    
-            "name": "Test Customer",
-            "adress": "Test Adress",
-             "adressNr": 1,
-            "email": "test@test.ch",
-            "tel": 123456789,
-            "city": "Test City",
-            "postalCode": 1234,
-         },
-     )
+
+def create_access_token_for_test():
+    # Erstellen Sie die Daten für Ihren Testbenutzer
+    test_user_data = {
+        "name": "testuser",
+        "hashed_password": "hashed_password_here",  # Sie sollten das echte gehashte Passwort hier einfügen
+        "is_authorised": True  # Oder False, je nachdem, ob der Benutzer authorisiert sein soll oder nicht
+    }
+
+    # Senden Sie eine POST-Anfrage, um den Testbenutzer zu registrieren
+    response = client.post("/user/register", json=test_user_data)
+    # Das Zugriffstoken des Testbenutzers
+    access_token = response.json()["access_token"]
+    return access_token
+
+def create_customer_for_test(access_token):
+    headers = {
+        "Authorization": f"Bearer {access_token}",
+        "Content-Type": "application/json",
+    }
+    customer_data = {
+        "id": 1,
+        "name": "Test Customer",
+        "adress": "Test Adress",
+        "adressNr": 1,
+        "email": "test@test.ch",
+        "tel": 123456789,
+        "city": "Test City",
+        "postalCode": 1234,
+    }
+    response = client.post("/customer/", headers=headers, json=customer_data)
     return response
+
 
         
 def test_create_customer():
-    response = create_customer_for_test()
+    access_token = create_access_token_for_test()
+    response = create_customer_for_test(access_token=access_token)
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["name"] == "Test Customer"
@@ -69,7 +88,8 @@ def test_create_customer():
     assert data["id"] == 1
 
 def test_read_customer():
-    create_customer_for_test()
+    access_token = create_access_token_for_test()
+    response = create_customer_for_test(access_token=access_token)
     response = client.get("/customer/1")
     assert response.status_code == 200, response.text
     data = response.json()
