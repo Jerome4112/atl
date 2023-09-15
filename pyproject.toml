@@ -11,6 +11,7 @@ fastapi = {extras = ["all"], version = "^0.103.0"}
 sqlalchemy = "^2.0.20"
 pytest = "^7.4.2"
 httpx = "^0.25.0"
+python-jose = "^3.3.0"
 
 
 [build-system]
