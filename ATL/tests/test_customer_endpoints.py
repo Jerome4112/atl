@@ -75,7 +75,7 @@ def create_customer_for_test(access_token):
         
 def test_create_customer():
     access_token = create_access_token_for_test()
-    response = create_customer_for_test(access_token=access_token)
+    response = create_customer_for_test(access_token)
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["name"] == "Test Customer"
@@ -89,24 +89,26 @@ def test_create_customer():
 
 def test_read_customer():
     access_token = create_access_token_for_test()
-    response = create_customer_for_test(access_token=access_token)
-    response = client.get("/customer/1")
+    create_customer_for_test(access_token)
+    response = client.get("/customer/1", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 200, response.text
     data = response.json()
     assert data["name"] == "Test Customer"
     assert data["id"] == 1
 
 def test_read_customer_not_found():
-    create_customer_for_test()
-    response = client.get("/customer/2")
+    access_token = create_access_token_for_test()
+    create_customer_for_test(access_token)
+    response = client.get("/customer/2", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 404, response.text
     data = response.json()
     assert data["detail"] == "Customer not found"
 
 def test_read_all_customer():
-    create_customer_for_test()
+    access_token = create_access_token_for_test()
+    create_customer_for_test(access_token)
     client.post(
-        "/customer/",
+        "/customer/",headers={"Authorization": f"Bearer {access_token}"},
         json={
             "id": 2,    
             "name": "Test Customer 2",
@@ -118,7 +120,7 @@ def test_read_all_customer():
             "postalCode": 123456,
             },
         )
-    response = client.get("/customer/")
+    response = client.get("/customer/", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 200, response.text
     data = response.json()
     assert len(data) == 2
@@ -129,9 +131,10 @@ def test_read_all_customer():
 
 
 def test_update_customer():
-    create_customer_for_test()
+    access_token = create_access_token_for_test()
+    create_customer_for_test(access_token)
     response = client.put(
-        "/customer/1",
+        "/customer/1", headers={"Authorization": f"Bearer {access_token}"},
         json={
             "id": 1,
             "name": "Test Customer 2",
@@ -155,8 +158,9 @@ def test_update_customer():
     assert data["id"] == 1
 
 def test_delete_customer():
-    create_customer_for_test()
-    response = client.delete("/customer/1")
+    access_token = create_access_token_for_test()
+    create_customer_for_test(access_token)
+    response = client.delete("/customer/1", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 200, response.text
     
 
