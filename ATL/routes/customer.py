@@ -30,14 +30,14 @@ def read_customers(skip: int = 0, limit: int = 100, db: Session = Depends(get_db
 
 
 @router.get("/{customer_id}", response_model=Customer, tags=["Customer"])
-def read_customer_workers(customer_id: int, db: Session = Depends(get_db)):
+def read_customer_Orders(customer_id: int, db: Session = Depends(get_db)):
     db_customer = get_customer(db, customer_id=customer_id)
     if db_customer is None:
         raise HTTPException(status_code=404, detail="Customer not found")
     return db_customer
 
 @router.put("/{customer_id}", response_model=CustomerCreate, tags=["Customer"])
-def update_customer(customer_id: int, customer_update: CustomerCreate, db: Session = Depends(get_db)):
+def update_customer_by_id(customer_id: int, customer_update: CustomerCreate, db: Session = Depends(get_db)):
     updated_customer = update_customer(db=db, customer_id=customer_id, customer_update=customer_update)
     if not updated_customer:
         raise HTTPException(status_code=404, detail="Customer not found")
