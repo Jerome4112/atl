@@ -12,6 +12,7 @@ class EmployeeBase(BaseModel):
 
 class EmployeeCreate(EmployeeBase):
     email: str
+    passwordEmail: str
     tel: int
 
 
@@ -20,6 +21,7 @@ class Employee(EmployeeBase):
     first_name: str
     last_name: str
     email: str
+    passwordEmail:str
     tel: int
     orders: list[Order] =[]
 

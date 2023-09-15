@@ -2,9 +2,14 @@ from sqlalchemy.orm import Session
 
 from ATL.models.employee import Employee
 from ATL.schemas.employee import EmployeeCreate, Employee_order
+from passlib.context import CryptContext
+
+
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 
 def get_employee(db: Session, employee_id: int):
+    
     return db.query(Employee).filter(Employee.id == employee_id).first()
 
 def get_employee_order(db: Session, employee_id: int):
@@ -20,7 +25,15 @@ def get_employees(db: Session, skip: int = 0, limit: int = 100):
 
 
 def create_employee(db: Session, employee: EmployeeCreate, customer_id: int):
-    db_employee = Employee(id=employee.id, first_name=employee.first_name, last_name=employee.last_name, email=employee.email, tel=employee.tel, customer_id=customer_id)
+    db_employee = Employee(
+        id=employee.id,
+        first_name=employee.first_name,
+        last_name=employee.last_name,
+        email=employee.email,
+        passwordEmail=employee.passwordEmail,
+        tel=employee.tel,
+        customer_id=customer_id
+    )
     db.add(db_employee)
     db.commit()
     db.refresh(db_employee)

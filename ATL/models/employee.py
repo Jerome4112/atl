@@ -11,6 +11,7 @@ class Employee(Base):
     first_name = Column(String, index=True)
     last_name = Column(String, index=True)
     email=Column(String, index=True)
+    passwordEmail=Column(String, index=True)
     tel=Column(Integer, index=True)
     customer_id = Column(Integer, ForeignKey("customer.id"))
 
