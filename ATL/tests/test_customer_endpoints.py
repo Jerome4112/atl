@@ -40,14 +40,13 @@ def clear_db():
     Base.metadata.create_all(bind=engine)
 
 def create_access_token_for_test():
-    # Erstellen Sie die Daten für Ihren Testbenutzer
+    # Erstellen der Daten für den Testbenutzer
     test_user_data = {
         "name": "testuser",
-        "hashed_password": "hashed_password_here",  # Sie sollten das echte gehashte Passwort hier einfügen
-        "is_authorised": True  # Oder False, je nachdem, ob der Benutzer authorisiert sein soll oder nicht
+        "hashed_password": "Test",
+        "is_authorised": True  
     }
-
-    # Senden Sie eine POST-Anfrage, um den Testbenutzer zu registrieren
+    # POST-Anfrage, um den Testbenutzer zu registrieren
     response = client.post("/user/register", json=test_user_data)
     # Das Zugriffstoken des Testbenutzers
     access_token = response.json()["access_token"]
@@ -162,6 +161,9 @@ def test_delete_customer():
     create_customer_for_test(access_token)
     response = client.delete("/customer/1", headers={"Authorization": f"Bearer {access_token}"})
     assert response.status_code == 200, response.text
+    data = response.json()
+    assert data["name"] == "Test Customer"
+    assert data["id"] == 1
     
 
 
