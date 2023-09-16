@@ -47,7 +47,7 @@ def delete_order_by_id(order_id: int, db: Session = Depends(get_db), token: str 
         raise HTTPException(status_code=404, detail="Order not found")
     return deleted_order
 
-@router.post("/add_program", tags=["Order"])
+@router.post("/add_program_to_order", tags=["Order"])
 def add_program_to_order(order_id: int, program_id: int, db: Session = Depends(get_db), token: str = Depends(oauth2_scheme)):
     order_program = add_program(db, order_id, program_id)
     if not order_program:

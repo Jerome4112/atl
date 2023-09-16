@@ -7,6 +7,7 @@ from pytest import fixture
 from ATL.database import Base
 from ATL.main import app
 from ATL.dependencies import get_db
+from ATL.tests.prep import create_access_token_for_test, create_customer_for_test, client
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app_test.db"
 
@@ -31,46 +32,11 @@ def override_get_db():
 
 app.dependency_overrides[get_db] = override_get_db
 
-client = TestClient(app)
-
 
 @fixture(scope="function", autouse=True)
 def clear_db():
     Base.metadata.drop_all(bind=engine)
     Base.metadata.create_all(bind=engine)
-
-def create_access_token_for_test():
-    # Erstellen der Daten für den Testbenutzer
-    test_user_data = {
-        "name": "testuser",
-        "hashed_password": "Test",
-        "is_authorised": True  
-    }
-    # POST-Anfrage, um den Testbenutzer zu registrieren
-    response = client.post("/user/register", json=test_user_data)
-    # Das Zugriffstoken des Testbenutzers
-    access_token = response.json()["access_token"]
-    return access_token
-
-def create_customer_for_test(access_token):
-    headers = {
-        "Authorization": f"Bearer {access_token}",
-        "Content-Type": "application/json",
-    }
-    customer_data = {
-        "id": 1,
-        "name": "Test Customer",
-        "adress": "Test Adress",
-        "adressNr": 1,
-        "email": "test@test.ch",
-        "tel": 123456789,
-        "city": "Test City",
-        "postalCode": 1234,
-    }
-    response = client.post("/customer/", headers=headers, json=customer_data)
-    return response
-
-
         
 def test_create_customer():
     access_token = create_access_token_for_test()
