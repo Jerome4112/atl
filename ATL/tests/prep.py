@@ -1,7 +1,7 @@
 from fastapi.testclient import TestClient
 from ATL.main import app
 
-
+#Erstellung der Testdaten
 
 client = TestClient(app)
 
@@ -18,6 +18,7 @@ def create_access_token_for_test():
     access_token = response.json()["access_token"]
     return access_token
 
+#Erstellen eines Testkunden
 def create_customer_for_test(access_token):
     headers = {
         "Authorization": f"Bearer {access_token}",
@@ -36,6 +37,8 @@ def create_customer_for_test(access_token):
     response = client.post("/customer/", headers=headers, json=customer_data)
     return response
 
+
+#Erstellen eines Testmitarbeiters
 def create_employee_for_test(access_token):
     headers = {
         "Authorization": f"Bearer {access_token}",
@@ -52,6 +55,7 @@ def create_employee_for_test(access_token):
     response = client.post(f"/employee/{1}", headers=headers, json=employee_data)
     return response
 
+#Erstellen eines Testauftrags
 def create_order_for_test(access_token):
     headers = {
         "Authorization": f"Bearer {access_token}",
@@ -66,6 +70,7 @@ def create_order_for_test(access_token):
     response = client.post(f"/order/{1},{1}", headers=headers, json=order_data)
     return response
 
+#Erstellen eines Testprogramms
 def create_program_for_test(access_token):
     headers = {
         "Authorization": f"Bearer {access_token}",

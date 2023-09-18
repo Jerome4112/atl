@@ -10,4 +10,6 @@ class Program(Base):
     licenseKey = Column(String, index=True)
     version = Column(String, index=True)
     installLink = Column(String, index=True)
+     # Beziehung zu den Bestellungen (Order), die dieses Programm zugeordnet sind,
+    # über die Tabelle "order_programs
     orders = relationship("Order", secondary="order_programs", back_populates="programs")

@@ -7,7 +7,7 @@ from pytest import fixture
 from ATL.database import Base
 from ATL.main import app
 from ATL.dependencies import get_db
-from ATL.tests.prep import create_access_token_for_test, create_customer_for_test, create_employee_for_test,create_order_for_test, client
+from ATL.tests.prep import create_access_token_for_test, create_customer_for_test, create_employee_for_test,create_order_for_test, client #Testdaten importieren
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./sql_app_test.db"
 

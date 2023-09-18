@@ -9,7 +9,6 @@ class CustomerBase(BaseModel):
 
 
 class CustomerCreate(CustomerBase):
-    name: str
     adress: str
     adressNr: int
     email: str

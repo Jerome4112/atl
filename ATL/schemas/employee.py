@@ -17,9 +17,6 @@ class EmployeeCreate(EmployeeBase):
 
 
 class Employee(EmployeeBase):
-    id: int
-    first_name: str
-    last_name: str
     email: str
     passwordEmail:str
     tel: int

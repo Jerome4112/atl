@@ -13,6 +13,16 @@ ALGORITHM = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 60
 
 def create_access_token(data: dict, expires_delta: Union [timedelta, None] = None):
+    """
+    Erstellt ein Zugriffstoken basierend auf den bereitgestellten Daten.
+
+    :param data: Die Benutzerdaten, die im Token codiert werden sollen.
+    :type data: dict
+    :param expires_delta: Die optionale Dauer, für die das Token gültig sein soll.
+    :type expires_delta: Union[timedelta, None]
+    :return: Das erstellte Zugriffstoken.
+    :rtype: str
+    """
     to_encode = data.copy()
     if expires_delta:
         expires = datetime.utcnow() + expires_delta
@@ -24,6 +34,14 @@ def create_access_token(data: dict, expires_delta: Union [timedelta, None] = Non
     return encoded_jwt
 
 def is_token_valid(token: str):
+    """
+    Überprüft, ob ein Zugriffstoken gültig ist.
+
+    :param token: Das zu überprüfende Zugriffstoken.
+    :type token: str
+    :return: True, wenn das Token gültig ist, andernfalls False.
+    :rtype: bool
+    """
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
         expire = payload.get("exp")
