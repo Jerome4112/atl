@@ -126,5 +126,12 @@ def test_delete_employee():
     assert data["id"] == 1
     assert data["first_name"] == "Test"
     assert data["last_name"] == "Test"
+
+
+def test_get_employee_not_authorised():
+    response = client.get("/employee/1")
+    assert response.status_code == 401, response.text
+    data = response.json()
+    assert data["detail"] == "Not authenticated"
     
 

@@ -94,3 +94,8 @@ def test_add_program_to_order():
     assert data["message"] == "Program added to order successfully"
 
 """
+def test_get_order_not_authorised():
+    response = client.get("/order/1")
+    assert response.status_code == 401, response.text
+    data = response.json()
+    assert data["detail"] == "Not authenticated"

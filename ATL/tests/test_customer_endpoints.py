@@ -130,6 +130,12 @@ def test_delete_customer():
     data = response.json()
     assert data["name"] == "Test Customer"
     assert data["id"] == 1
+
+def test_get_customer_not_authorised():
+    response = client.get("/customer/1")
+    assert response.status_code == 401, response.text
+    data = response.json()
+    assert data["detail"] == "Not authenticated"
     
 
 

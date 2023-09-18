@@ -88,3 +88,10 @@ def test_delete_program():
     assert data["version"] == "1.123"
     assert data["installLink"] == "https://www.test.ch"
 
+
+def test_get_program_not_authorised():
+    response = client.get("/program/1")
+    assert response.status_code == 401, response.text
+    data = response.json()
+    assert data["detail"] == "Not authenticated"
+
