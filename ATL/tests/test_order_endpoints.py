@@ -85,15 +85,7 @@ def test_delete_order():
     assert data["title"] == "Test"
     assert data["hardware"] == "Test"
     assert data["details"] == "Test"
-"""""
-def test_add_program_to_order():
-    access_token = create_access_token_for_test()
-    response = client.post("order/add_program_to_order", headers={"Authorization": f"Bearer {access_token}"}, json={"order_id": 1, "program_id": 1})
-    assert response.status_code == 200, response.text
-    data = response.json()
-    assert data["message"] == "Program added to order successfully"
 
-"""
 def test_get_order_not_authorised():
     response = client.get("/order/1")
     assert response.status_code == 401, response.text
