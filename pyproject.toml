@@ -12,6 +12,7 @@ sqlalchemy = "^2.0.20"
 pytest = "^7.4.2"
 httpx = "^0.25.0"
 python-jose = "^3.3.0"
+passlib = "^1.7.4"
 
 
 [build-system]
