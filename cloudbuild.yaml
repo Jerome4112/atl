@@ -1,8 +1,6 @@
 steps:
 - name: python:3.11-slim
-  args: ["pip", "install", "poetry"]
-  - name: python:3.11-slim
-  args: ["poetry", "install"]
-  - name: python:3.11-slim
-  entrypoint: "python"
-  args: ["-m", "pytest", "tests"]
+  entrypoint: bash
+  args:
+  - -c
+  - "pip install poetry && poetry install && poetry run pytest"
