@@ -43,7 +43,7 @@ def test_create_customer():
     response = create_customer_for_test(access_token)
     assert response.status_code == 200, response.text
     data = response.json()
-    assert data["name"] == "Test Customer"
+    assert data["name"] == "Test Customer1"
     assert data["adress"] == "Test Adress"
     assert data["adressNr"] == 1
     assert data["email"] == "test@test.ch"
