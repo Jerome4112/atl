@@ -18,4 +18,5 @@ steps:
         "us-central1",
         "--platform",
         "managed",
-        "--allow-unauthenticated"]
+        "--allow-unauthenticated"
+        --port 8000]
