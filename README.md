@@ -1,10 +1,10 @@
 # ATL
 
-Produktbeschreibung:
+# Produktbeschreibung:
 -------------------------------------------------------------------------------------------------------------------------------------------------
 Die Software, Easy Client dient zur Erfassung der Kundenbedürfnisse, wenn diese ein neues Gerät benötigen bzw. wenn sie ein neues Gerät bestellt haben. Die Informationen, welche vorab beschaft wurden, waren in den meisten Fällen sehr dürftig. Ich, als Techniker, musste beim Kunden genaue Details einholen, welche Programme vorab für ihn installiert werden sollen. Mein Produkt dient der Erfassung dieser Daten, in dem zuerst der Kunde als Firma, der einzelne Mitarbeiter als Auftraggeber und der effektive Auftrag erstellt wird und die zu installierenden Programme dem Auftrag hinzugefügt werden. Dadurch kann die Kundenzufriedenheit und der Prozess der Informationsbeschaffung verbessert werden, da alle Daten vorab gesammelt werden.
 
-Start Anleitung:
+# Start Anleitung:
 -------------------------------------------------------------------------------------------------------------------------------------------------
 1. Um die Applikation starten zu können, stellen Sie sicher, dass Sie poetry installiert haben.
 2. Mit dem Befehl "poetry install" werden die projektabhängigen Dienste installiert.
@@ -17,7 +17,7 @@ INFO:     Application startup complete.
 4. Öffnen Sie diesen Pfad im Browser Ihres Vertrauens : http://127.0.0.1:8000
 5. Geben Sie am Ende des Pfades /docs ein um die einzelnen Endpunkte sehen zu können, der Pfad sollte so aussehen: http://127.0.0.1:8000/docs
 
-Benutzung Anleitung:
+# Benutzung Anleitung:
 --------------------------------------------------------------------------------------------------------------------------------------------------
 1. Bevor Sie die Software benutzen können, müssen Sie sich registrieren, nutzen Sie dazu den Endpunkt user/register.
    Geben Sie einen beliebigen Benutzernamen und ein Passwort ein.
@@ -31,7 +31,7 @@ Benutzung Anleitung:
 8. Fügen Sie die erstellten Programme mit dem Endpunkt Add_program_to_order dem Auftrag hinzu.
 9. Sie können nun mit dem Endpunkt "Read Customer Orders" unter Angabe der Kunden ID den gesamten Auftrag mit allen Informationen ausgeben. Sie können auch die anderen Read Endpunkte benutzen, wenn sie beispielsweise nur den Auftrag mit den Programmen sehen wollen, nutzen Sie den Endpunkt "Read Order".
 
-Überlegungen:
+# Überlegungen:
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
 Struktur:
@@ -43,12 +43,23 @@ Sicherheit:
 Da ich in meinem Programm Passwörter und Zugangsdaten von Kunden nicht gehashed speichere, was normalerweise keine gute Idee ist, aber leider nötig, bedarf es Sicherheitsvorkehrungen, damit diese Daten nicht in falsche Hände geraten. Die Passwörter oder Lizenzen der Kunden zu hashen hätte nichts gebracht, da ich sie ohnehin wieder im Klartext ausgeben muss. Daher habe ich mich für eine Authentifizierung mit OAuth entschieden und so umgesetzt. Aufgrund der eher experimentellen Umgebung habe ich den Registrierungsendpunkt offen gelassen, um die Benutzung nicht zu erschweren. In einer Produktivumgebung wird dieser Enpunkt dann nur für Administratoren zugänglich sein.
 
 
-Verbesserungen bei mehr Zeit:
+# Verbesserungen bei mehr Zeit:
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
 GUI Implementierung: Sehr gerne hätte ich noch eine Graphische Benutzeroberfläche für das Programm entwickelt, leider habe ich ein wenig unterschätzt, wie viel Aufwand mein Projekt generiert und ich schon deutlich über den budgetierten 16 Stunden liege für diese ATL. Daher hatte ich leider keine Zeit mehr, ein GUI zu Implementieren.
 
 Überprüfen der Tokengültigkeit: Damit mein Programm benutzt werden kann, muss man sich registrieren und anmelden. Die einzelnen Endpunkte überprüfen aber nicht ob der Token noch gültig ist, sondern nur ob er mitgegeben wird. Wenn ich mehr Zeit gehabt hätte, hätte ich dies gerne sauberer gelöst. 
+
+
+# ATL 2
+
+## Cloudbuild
+
+## Container registry
+
+## Cloudbuild abbruch Tests fehlerhaft
+
+## Cloud Run
 
 
 

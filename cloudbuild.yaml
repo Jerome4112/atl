@@ -13,7 +13,7 @@ steps:
       [
         "run",
         "deploy",
-        "blog",
+        "atl",
         "--image",
         "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA",
         "--region",
