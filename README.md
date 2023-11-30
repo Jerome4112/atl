@@ -74,13 +74,13 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
    ![Trigger aktiv](https://github.com/Jerome4112/atl/blob/main/Images/trigger%20aktiv.png)
 
 ### Anpassungen am pyproject.toml File
-   Dich wärend der Entwicklung diverse Libarys installiert habe die für den Betrieb nicht nötig sind habe ich das File mit folgendem dev. bereich ergänzt:
-   <clipboard-copy for="blob-path" class="btn btn-sm BtnGroup-item">
-</clipboard-copy>
-<div id="blob-path">src/index.js</div>
+   Da ich wärend der Entwicklung diverse Libarys installiert habe die für den Betrieb nicht nötig sind habe ich das File mit folgendem dev. bereich ergänzt:
+   
+```yaml
 [tool.poetry.group.dev.dependencies]
-   pytest = "^7.4.2"
-   httpx = "^0.25.0"
+pytest = "^7.4.2"
+httpx = "^0.25.0"
+
    
     So wird der Dockercontainer nur mit den wirklich nötigen Libarys erstellt die zum betrieb erforderlich sind.
 - Erstellen des Dockerfile.
