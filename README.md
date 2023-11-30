@@ -69,9 +69,9 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 - Erstellen des Triggers auf GitHub Repository
    Der Auftrag sieht vor, dass wenn ein neuer Push auf das Github Repository erkannt wird automatisch ein neuer Build ausgeführt wird. Dazu musste ein entsprechender Trigger konfiguriert werden.
    Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und angabe des Repositorys.
-   ![Trigger](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true) 
+   ![Trigger](https://github.com/Jerome4112/atl/blob/main/Images/Trigger.png) 
    Wenn dieser aktiv ist sieht er folgendermassen aus:
-   ![Trigger](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+   ![Trigger aktiv](https://github.com/Jerome4112/atl/blob/main/Images/trigger%20aktiv.png)
 
 - Anpassungen am pyproject.toml File
    Dich wärend der Entwicklung diverse Libarys installiert habe die für den Betrieb nicht nötig sind habe ich das File mit folgendem dev. bereich ergänzt:
@@ -103,7 +103,7 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 
 - Ausführen eines Push in das Github Repository
    Damit der Trigger auslöst wird, ist ein Push in das Github repository nötig. Die vier Steps aus dem Cloudbuild.yaml file werden im anschluss abgearbeitet.
-   ![Cloudbuild schritte](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+   ![Cloudbuild schritte](https://github.com/Jerome4112/atl/blob/main/Images/Cloudbuild-Steps.png)
 
 - Öffnen der Service Url.
    Meine Applikation ist nun über folgenden link erreichbar:
@@ -112,10 +112,10 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 
 ## Cloudbuild abbruch Tests fehlerhaft
 Um zu testen, ob der Cloudbuild abgebrochen wird, wenn ein test fehlerhaft ist habe ich den Test test_create_customer() angepasst und das erwatete ergebnis auf Test Customer1 gesetzt.
-![angepasster test](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![angepasster test](https://github.com/Jerome4112/atl/blob/main/Images/angepasster%20test.png)
 
 Der Build wurde abgebrochen aufgrund des erwarteten Test ergebnisses Customer1, der aber tatsächlich Test Customer heisst.
-![Build abgebrochen](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![Build abgebrochen](https://github.com/Jerome4112/atl/blob/main/Images/Build%20abgebrochen.png)
 
 
 
@@ -128,7 +128,7 @@ Ich habe mich entschieden, das Github Repository umzubenennen von "ATL" zu "atl"
 
 ### Cloud Run nicht aktiviert
 Ein build wurde bei mir abgebrochen, da ich den Dienst Cloudrun nicht aktiviert hatte. Sobald ich diesen in der Googlecloud aktiviert habe het es fehlerfrei funktioniert.
-![Cloudrun nicht aktiviert](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![Cloudrun nicht aktiviert](https://github.com/Jerome4112/atl/blob/main/Images/Cloudrun%20nicht%20aktiviert.png)
 
 
 
