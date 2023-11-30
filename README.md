@@ -68,9 +68,8 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 
 ### Erstellen des Triggers auf GitHub Repository
    Der Auftrag sieht vor, dass wenn ein neuer Push auf das Github Repository erkannt wird automatisch ein neuer Build ausgeführt wird. Dazu musste ein entsprechender Trigger konfiguriert werden.
-   Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und angabe des           Repositorys.
+   Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und angabe des Repositorys.
    ![Trigger](https://github.com/Jerome4112/atl/blob/main/Images/Trigger.png) 
-   Wenn dieser aktiv ist sieht er folgendermassen aus:
    ![Trigger aktiv](https://github.com/Jerome4112/atl/blob/main/Images/trigger%20aktiv.png)
 
 ### Anpassungen am pyproject.toml File
@@ -80,7 +79,7 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
 httpx = "^0.25.0"
-
+```
    
     So wird der Dockercontainer nur mit den wirklich nötigen Libarys erstellt die zum betrieb erforderlich sind.
 - Erstellen des Dockerfile.
