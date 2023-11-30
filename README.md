@@ -61,7 +61,7 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 
 - Einrichten der Budget begrenzung.
    Da Kosten von Clouddiensten im vorfeld schwierig zu berechnen sind, da sie nach effektiven benutzung von Ressourcen abgerechnet werden, war es nötig eine entsprechnde Budget begrenzung bzw einen Alarm einzurichten sofern mehr wie 10 CHF.- innerhalb eines Monats abgebucht werden, damit keine unbeabsichtigten horende Kosten entstehen.
-   ![Budgetbegrenzung](https://github.com/[Jerome4112]/[atl]/blob/[main]/budgetbegrenzung.png?raw=true)
+   ![Budgetbegrenzung](https://github.com/Jerome4112/atl/blob/main/Images/Budgetbegrenzung.png)
 
 - Aktivieren von Cloudbuild.
    Um aus dem Dockerfile direkt ein Container zu erstellen war es nötig den Dienst "Cloudbuild" zu aktivieren.
