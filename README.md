@@ -56,31 +56,31 @@ GUI Implementierung: Sehr gerne hätte ich noch eine Graphische Benutzeroberflä
 ## Durchgeführte Schritte
 Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 
-- Erstellen des Kontos in der Google Cloud.
+### Erstellen des Kontos in der Google Cloud.
    Die Googlecloud stellt einen Kostenlosen Testzeitraum von 90Tagen bzw. bis 271CHF(Stand: 29.11.2023) aufgebraucht sind zur verfügung. Um diesen Dienst zu nutzen musste die Kreditkarte hinterlegt werden.
 
-- Einrichten der Budget begrenzung.
+### Einrichten der Budget begrenzung.
    Da Kosten von Clouddiensten im vorfeld schwierig zu berechnen sind, da sie nach effektiven benutzung von Ressourcen abgerechnet werden, war es nötig eine entsprechnde Budget begrenzung bzw einen Alarm einzurichten sofern mehr wie 10 CHF.- innerhalb eines Monats abgebucht werden, damit keine unbeabsichtigten horende Kosten entstehen.
    ![Budgetbegrenzung](https://github.com/Jerome4112/atl/blob/main/Images/Budgetbegrenzung.png)
 
-- Aktivieren von Cloudbuild.
+### Aktivieren von Cloudbuild.
    Um aus dem Dockerfile direkt ein Container zu erstellen war es nötig den Dienst "Cloudbuild" zu aktivieren.
 
-- Erstellen des Triggers auf GitHub Repository
+### Erstellen des Triggers auf GitHub Repository
    Der Auftrag sieht vor, dass wenn ein neuer Push auf das Github Repository erkannt wird automatisch ein neuer Build ausgeführt wird. Dazu musste ein entsprechender Trigger konfiguriert werden.
-   Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und angabe des Repositorys.
+   Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und angabe des           Repositorys.
    ![Trigger](https://github.com/Jerome4112/atl/blob/main/Images/Trigger.png) 
    Wenn dieser aktiv ist sieht er folgendermassen aus:
    ![Trigger aktiv](https://github.com/Jerome4112/atl/blob/main/Images/trigger%20aktiv.png)
 
-- Anpassungen am pyproject.toml File
+### Anpassungen am pyproject.toml File
    Dich wärend der Entwicklung diverse Libarys installiert habe die für den Betrieb nicht nötig sind habe ich das File mit folgendem dev. bereich ergänzt:
    <clipboard-copy for="blob-path" class="btn btn-sm BtnGroup-item">
-  [tool.poetry.group.dev.dependencies]
-   pytest = "^7.4.2"
-   httpx = "^0.25.0"
 </clipboard-copy>
 <div id="blob-path">src/index.js</div>
+[tool.poetry.group.dev.dependencies]
+   pytest = "^7.4.2"
+   httpx = "^0.25.0"
    
     So wird der Dockercontainer nur mit den wirklich nötigen Libarys erstellt die zum betrieb erforderlich sind.
 - Erstellen des Dockerfile.
@@ -93,7 +93,7 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
    Im ersten Schritt wird poetry installiert und die Dateien pyproject.toml und poetry.lock exportiert in eine requirements.txt datei. Dadurch muss nicht zusätzlich poetry in den Runcontainer installiert sein und ist dadurch schlanker und sparen somit Speicher.
    Im zweiten schritt wird mit pip aus der requirements.txt Datei alle Projektabhängigkeiten installiert und mit uvicorn ausgeführt.
 
-- Erstellen des cloudbuild.yaml File.
+### Erstellen des cloudbuild.yaml File.
     Damit die Google Cloud den Container richtig erstellt habe ich diese Konfiguration verwendet:
    <clipboard-copy for="blob-path" class="btn btn-sm BtnGroup-item">
    https://github.com/Jerome4112/atl/blob/main/cloudbuild.yaml
@@ -101,11 +101,11 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
    <div id="blob-path">src/index.js</div>
    Da gemäss Aufgabe der Container erst erstellt werden darf, wenn alle tests erfolgreich waren,  wird zuerst pytest ausgeführt. Wenn dies der fall war, wird gemäss Docker der Container erstellt. Der Container wird zu google Cloud run gepusht und somit ausgeführt.
 
-- Ausführen eines Push in das Github Repository
+### Ausführen eines Push in das Github Repository
    Damit der Trigger auslöst wird, ist ein Push in das Github repository nötig. Die vier Steps aus dem Cloudbuild.yaml file werden im anschluss abgearbeitet.
    ![Cloudbuild schritte](https://github.com/Jerome4112/atl/blob/main/Images/Cloudbuild-Steps.png)
 
-- Öffnen der Service Url.
+### Öffnen der Service Url.
    Meine Applikation ist nun über folgenden link erreichbar:
    (https://atl-diti5vaa7a-ew.a.run.app/docs)
 
