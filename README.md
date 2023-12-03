@@ -54,34 +54,34 @@ GUI Implementierung: Sehr gerne hätte ich noch eine Graphische Benutzeroberflä
 # ATL 2
 
 ## Durchgeführte Schritte
-Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
+Folgende Schritte waren nötig, um die Software in der Cloud zu deployen:
 
-### 1. Erstellen des Kontos in der Google Cloud.
-   Die Googlecloud stellt einen Kostenlosen Testzeitraum von 90Tagen bzw. bis 271CHF(Stand: 29.11.2023) aufgebraucht sind zur verfügung. Um diesen Dienst zu nutzen musste die Kreditkarte hinterlegt werden.
+### 1. Erstellen des Kontos in der Google Cloud
+   Die Googlecloud stellt einen kostenlosen Testzeitraum von 90 Tagen bzw. bis CHF 271.-(Stand: 29.11.2023) aufgebraucht sind zur verfügung. Um diesen Dienst zu nutzen, musste die Kreditkarte hinterlegt werden.
 
-### 2. Einrichten der Budget begrenzung.
-   Da Kosten von Clouddiensten im vorfeld schwierig zu berechnen sind, da sie nach effektiven benutzung von Ressourcen abgerechnet werden, war es nötig eine entsprechnde Budget begrenzung bzw einen Alarm einzurichten sofern mehr wie 10 CHF.- innerhalb eines Monats abgebucht werden, damit keine unbeabsichtigten horende Kosten entstehen.
+### 2. Einrichten der Budgetbegrenzung
+   Da Kosten von Clouddiensten im vorfeld schwierig zu berechnen sind, da sie nach effektiver Benutzung von Ressourcen abgerechnet werden, war es nötig eine entsprechende Budgetbegrenzung bzw. einen Alarm einzurichten sofern mehr wie CHF 10.- innerhalb eines Monats abgebucht werden, damit keine unbeabsichtigten horenden Kosten entstehen.
    ![Budgetbegrenzung](https://github.com/Jerome4112/atl/blob/main/Images/Budgetbegrenzung.png)
 
-### 3. Aktivieren von Cloudbuild.
-   Um aus dem Dockerfile direkt ein Container zu erstellen war es nötig den Dienst "Cloudbuild" zu aktivieren.
+### 3. Aktivieren von Cloudbuild
+   Um aus dem Dockerfile direkt einen Container zu erstellen, war es nötig den Dienst "Cloudbuild" zu aktivieren.
 
 ### 4. Erstellen des Triggers auf GitHub Repository
-Der Auftrag sieht vor, dass wenn ein neuer Push auf das Github Repository erkannt wird automatisch ein neuer Build ausgeführt wird. Dazu musste ein entsprechender Trigger konfiguriert werden.Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und angabe des Repositorys.
+Der Auftrag sieht vor, dass wenn ein neuer Push auf das Github Repository erkannt wird, automatisch ein neuer Build ausgeführt wird. Dazu musste ein entsprechender Trigger konfiguriert werden. Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und Angabe des Repositorys.
 ![Trigger](https://github.com/Jerome4112/atl/blob/main/Images/Triggerkonfiguration.png) 
 ![Trigger aktiv](https://github.com/Jerome4112/atl/blob/main/Images/trigger%20aktiv.png)
 
 ### 5. Anpassungen am pyproject.toml File
-   Da ich wärend der Entwicklung diverse Libarys installiert habe die für den Betrieb nicht nötig sind habe ich das File mit folgendem dev. bereich ergänzt:
+   Da ich wärend der Entwicklung diverse Libarys installiert habe, die für den Betrieb nicht nötig sind, habe ich das File mit folgendem dev. Bereich ergänzt:
    
 ```yaml
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.4.2"
 httpx = "^0.25.0"
 ```
-So wird der Dockercontainer nur mit den wirklich nötigen Libarys erstellt die zum betrieb erforderlich sind.
-### 6. Erstellen des Dockerfile.
-   Damit der Dockercontainer korrekt erstellt wird habe ich diese konfiguration verwendet:
+So wird der Dockercontainer nur mit den wirklich nötigen Libarys erstellt, die zum Betrieb erforderlich sind.
+### 6. Erstellen des Dockerfile
+   Damit der Dockercontainer korrekt erstellt wird, habe ich diese Konfiguration verwendet:
    ```yaml
 FROM python:3.11-slim as builder
 WORKDIR /tmp
@@ -99,10 +99,10 @@ ENTRYPOINT [ "uvicorn", "ATL.main:app", "--host", "0.0.0.0", "--port", "8000" ]
 EXPOSE 8000
 ```
 
-Im ersten Schritt wird poetry installiert und die Dateien pyproject.toml und poetry.lock exportiert in eine requirements.txt datei. Dadurch muss nicht zusätzlich poetry in den Runcontainer installiert sein und ist dadurch schlanker und sparen somit Speicher.
-   Im zweiten schritt wird mit pip aus der requirements.txt Datei alle Projektabhängigkeiten installiert und mit uvicorn ausgeführt.
+Im ersten Schritt wird poetry installiert und die Dateien pyproject.toml und poetry.lock exportiert in eine requirements.txt Datei. Dadurch muss nicht zusätzlich poetry in den Runcontainer installiert sein und ist dadurch schlanker und ich spare somit Speicher.
+   Im zweiten Schritt wird mit pip aus der requirements.txt Datei alle Projektabhängigkeiten installiert und mit uvicorn ausgeführt.
 
-### 7. Erstellen des cloudbuild.yaml File.
+### 7. Erstellen des cloudbuild.yaml File
    Damit die Google Cloud den Container richtig erstellt, habe ich diese Konfiguration verwendet:
  ```yaml
 steps:
@@ -131,38 +131,38 @@ steps:
       ]
 ```
    
-   Da gemäss Aufgabe der Container erst erstellt werden darf, wenn alle tests erfolgreich waren,  wird zuerst pytest ausgeführt. Wenn dies der fall war, wird gemäss Docker der Container erstellt. Der Container wird zu google Cloud run           gepusht und somit ausgeführt.
+   Da gemäss Aufgabe der Container erst erstellt werden darf, wenn alle Tests erfolgreich waren,  wird zuerst pytest ausgeführt. Wenn dies der Fall war, wird gemäss Docker der Container erstellt. Der Container wird zu Google Cloud run gepusht und somit ausgeführt.
 
 ### 8. Ausführen eines Push in das Github Repository
-   Damit der Trigger auslöst wird, ist ein Push in das Github repository nötig. Die vier Steps aus dem Cloudbuild.yaml file werden im anschluss abgearbeitet.
+   Damit der Trigger ausgelöst wird, ist ein Push in das Github repository nötig. Die vier Steps aus dem Cloudbuild.yaml file werden im anschluss abgearbeitet.
    ![Cloudbuild schritte](https://github.com/Jerome4112/atl/blob/main/Images/Cloudbuild-Steps.png)
 
-### 9. Öffnen der Service Url.
+### 9. Öffnen der Service Url
    Meine Applikation ist nun über folgenden link erreichbar:
    (https://atl-diti5vaa7a-ew.a.run.app/docs)
 
 
-## 10. Cloudbuild abbruch Tests fehlerhaft
-Um zu testen, ob der Cloudbuild abgebrochen wird, wenn ein test fehlerhaft ist habe ich den Test test_create_customer() angepasst und das erwatete ergebnis auf Test Customer1 gesetzt.
+## 10. Cloudbuild Abbruch Tests fehlerhaft
+Um zu testen, ob der Cloudbuild abgebrochen wird, wenn ein Test fehlerhaft ist, habe ich den Test test_create_customer() angepasst und das erwartete Ergebnis auf Test Customer1 gesetzt.
 ![angepasster test](https://github.com/Jerome4112/atl/blob/main/Images/angepasster%20test.png)
 
-Der Build wurde abgebrochen aufgrund des erwarteten Test ergebnisses Customer1, der aber tatsächlich Test Customer heisst.
+Der Build wurde abgebrochen aufgrund des erwarteten Test Ergebnisses Customer1, der aber tatsächlich Test Customer heisst.
 ![Build abgebrochen](https://github.com/Jerome4112/atl/blob/main/Images/Build%20abgebrochen.png)
 
 
 
 ## Probleme 
-Ich bin auf folgende probleme gestossen:
+Ich bin auf folgende Probleme gestossen:
 ### Git Hub Repository in Grossbuchstaben
-Der build wurde bei mir abgebrochen, weil die Variable $PROJECT_ID im cloudbuild.yaml File keine grossmuchstaben akzeptiert. 
+Der build wurde bei mir abgebrochen, weil die Variable $PROJECT_ID im cloudbuild.yaml File keine Grossbuchstaben akzeptiert. 
  ```yaml
 ERROR: (gcloud.run.deploy) PERMISSION_DENIED: Cloud Run Admin API has not been used in project crested-epoch-405817 before or it is disabled. Enable it by visiting https://console.developers.google.com/apis/api/run.googleapis.com/overview?project=crested-epoch-405817 then retry. If you enabled this API recently, wait a few minutes for the action to propagate to our systems and retry.
  ```
 
-Ich habe mich entschieden, das Github Repository umzubenennen von "ATL" zu "atl".Dadurch wurde der Fehler behoben.
+Ich habe mich entschieden, das Github Repository umzubenennen von "ATL" zu "atl". Dadurch wurde der Fehler behoben.
 
 ### Cloud Run nicht aktiviert
-Ein build wurde bei mir abgebrochen, da ich den Dienst Cloudrun nicht aktiviert hatte. Sobald ich diesen in der Googlecloud aktiviert habe het es fehlerfrei funktioniert.
+Ein build wurde bei mir abgebrochen, da ich den Dienst Cloudrun nicht aktiviert hatte. Sobald ich diesen in der Googlecloud aktiviert habe, hat es fehlerfrei funktioniert.
 ![Cloudrun nicht aktiviert](https://github.com/Jerome4112/atl/blob/main/Images/Cloudrun%20nicht%20aktiviert.png)
 
 
