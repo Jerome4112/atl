@@ -68,7 +68,7 @@ Folgende Schritte waren nötig um die Software in der Cloud zu deployen:
 
 ### 4. Erstellen des Triggers auf GitHub Repository
 Der Auftrag sieht vor, dass wenn ein neuer Push auf das Github Repository erkannt wird automatisch ein neuer Build ausgeführt wird. Dazu musste ein entsprechender Trigger konfiguriert werden.Unter Cloud Build -> Trigger -> Trigger erstellen. Der Radio Button "Push zu Zweig" muss aktiviert sein. Anschliessend muss das entsprechende Github Repository verbunden werden. Anmelden mit dem entsprechendem Profil und angabe des Repositorys.
-![Trigger](https://github.com/Jerome4112/atl/blob/main/Images/Trigger.png) 
+![Trigger](https://github.com/Jerome4112/atl/blob/main/Images/Triggerkonfiguration.png) 
 ![Trigger aktiv](https://github.com/Jerome4112/atl/blob/main/Images/trigger%20aktiv.png)
 
 ### 5. Anpassungen am pyproject.toml File
