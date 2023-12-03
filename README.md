@@ -57,7 +57,7 @@ GUI Implementierung: Sehr gerne hätte ich noch eine Graphische Benutzeroberflä
 Folgende Schritte waren nötig, um die Software in der Cloud zu deployen:
 
 ### 1. Erstellen des Kontos in der Google Cloud
-   Die Googlecloud stellt einen kostenlosen Testzeitraum von 90 Tagen bzw. bis CHF 271.-(Stand: 29.11.2023) aufgebraucht sind zur verfügung. Um diesen Dienst zu nutzen, musste die Kreditkarte hinterlegt werden.
+   Die Googlecloud stellt einen kostenlosen Testzeitraum von 90 Tagen bzw. bis CHF 271.-(Stand: 29.11.2023) aufgebraucht sind zur Verfügung. Um diesen Dienst zu nutzen, musste die Kreditkarte hinterlegt werden.
 
 ### 2. Einrichten der Budgetbegrenzung
    Da Kosten von Clouddiensten im vorfeld schwierig zu berechnen sind, da sie nach effektiver Benutzung von Ressourcen abgerechnet werden, war es nötig eine entsprechende Budgetbegrenzung bzw. einen Alarm einzurichten sofern mehr wie CHF 10.- innerhalb eines Monats abgebucht werden, damit keine unbeabsichtigten horenden Kosten entstehen.
