@@ -83,9 +83,20 @@ So wird der Dockercontainer nur mit den wirklich nötigen Libarys erstellt die z
 ### 6. Erstellen des Dockerfile.
    Damit der Dockercontainer korrekt erstellt wird habe ich diese konfiguration verwendet:
    ```yaml
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
-httpx = "^0.25.0"
+FROM python:3.11-slim as builder
+WORKDIR /tmp
+RUN pip install poetry
+COPY ./pyproject.toml ./poetry.lock ./
+RUN poetry export -f requirements.txt --output requirements.txt --without-hashes --without dev
+
+FROM python:3.11-slim
+WORKDIR /app
+COPY --from=builder /tmp/requirements.txt .
+RUN pip install -r requirements.txt
+RUN rm requirements.txt
+COPY ./ATL /app/ATL
+ENTRYPOINT [ "uvicorn", "ATL.main:app", "--host", "0.0.0.0", "--port", "8000" ]
+EXPOSE 8000
 ```
 
 Im ersten Schritt wird poetry installiert und die Dateien pyproject.toml und poetry.lock exportiert in eine requirements.txt datei. Dadurch muss nicht zusätzlich poetry in den Runcontainer installiert sein und ist dadurch schlanker und sparen somit Speicher.
@@ -94,9 +105,30 @@ Im ersten Schritt wird poetry installiert und die Dateien pyproject.toml und poe
 ### 7. Erstellen des cloudbuild.yaml File.
    Damit die Google Cloud den Container richtig erstellt, habe ich diese Konfiguration verwendet:
  ```yaml
-[tool.poetry.group.dev.dependencies]
-pytest = "^7.4.2"
-httpx = "^0.25.0"
+steps:
+  - name: python:3.11-slim
+    entrypoint: bash
+    args:
+      - "-c"
+      - "pip install poetry && poetry install && poetry run pytest"
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["build", "-t", "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA", "."]
+  - name: "gcr.io/cloud-builders/docker"
+    args: ["push", "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA"]
+  - name: "gcr.io/cloud-builders/gcloud"
+    args:
+      [
+        "run",
+        "deploy",
+        "atl",
+        "--image",
+        "gcr.io/$PROJECT_ID/$REPO_NAME:$COMMIT_SHA",
+        "--region",
+        "europe-west1",
+        "--allow-unauthenticated",
+        "--port",
+        "8000",
+      ]
 ```
    
    Da gemäss Aufgabe der Container erst erstellt werden darf, wenn alle tests erfolgreich waren,  wird zuerst pytest ausgeführt. Wenn dies der fall war, wird gemäss Docker der Container erstellt. Der Container wird zu google Cloud run           gepusht und somit ausgeführt.
